@@ -3,16 +3,7 @@
 /* Set the base font and background color for the entire app */
 body {
   font-family: Arial, sans-serif;
-  background-color: #ededed;
-}
-
-/* Center align the content in the container */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  background-color: #ffffff;
 }
 
 /* Style the input and button for the YouTube URL */
@@ -21,7 +12,7 @@ input[type="text"] {
   font-size: 0.9rem;
   border: 0.5px solid #ccc;
   border-radius: 5px;
-  width: 300%;
+  width: 100%;
   background-color: #f4f4f4;
   color: #333;
   text-align: left; /* Center-align the text within the input */
@@ -41,11 +32,30 @@ input[type="text"]:focus {
   text-align: center;
 }
 
+.text-gray-600 {
+  color: #4f4f4f;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 500px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 16px;
+  margin-top: 50px;
+}
+
+.align-top {
+  margin-top: -400px;
+}
+
+.margin-top {
+  margin-top: -300px;
+}
+
 /* Add some spacing between input and button */
 input[type="text"] + button {
   margin-top: 0.3rem;
 }
-
 
 /* Style the "Get Thumbnail Images" button */
 .btn-blue {
@@ -67,6 +77,10 @@ input[type="text"] + button {
   background-color: #3c627b;
 }
 
+.mt-8 {
+  margin-top: 2rem; /* Adjust the margin value as needed */
+}
+
 /* Add this CSS to center the buttons */
 .thumbnail-option {
   background-color: white;
@@ -79,7 +93,6 @@ input[type="text"] + button {
   flex-direction: column; /* Center the button vertically */
   align-items: center; /* Center the button horizontally */
 }
-
 
 .thumbnail-option:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -101,9 +114,104 @@ input[type="text"] + button {
   cursor: pointer;
   transition: background-color 0.2s;
   margin-top: 0.5rem; /* Add spacing between the image and button */
-  margin-bottom: 0.1rem
 }
 
 .thumbnail-option button:hover {
   background-color: #3d84b9;
+}
+
+/* Add margin-bottom to the heading and paragraph */
+.header-heading {
+  margin-bottom: 2rem; /* You can adjust the spacing as needed */
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  width: 80%;
+}
+
+.nav-container,
+footer,
+main {
+  display: block;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.nav {
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.nav-container {
+  margin: 0.5%;
+  position: relative;
+  text-align: left;
+}
+
+.nav-title {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  color: #555;
+  display: inline-block;
+  margin: 0;
+  padding-right: 0.2rem;
+  font-size: 180%;
+  margin-bottom: 0.5%;
+  margin-left: -1%;
+}
+
+.nav-title:focus,
+.nav-title:hover {
+  opacity: 0.6;
+}
+
+.nav .fontBlack {
+  color: #000 !important;
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-right: 2%;
+  margin-bottom: 0.5%;
+}
+
+.nav li {
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  color: #555;
+  display: inline-block;
+  opacity: .6;
+  padding: 0 2rem 0 0;
+  position: relative;
+}
+
+.nav li:focus,
+.nav li:hover {
+  opacity: 1;
+}
+
+.nav a {
+  color: #555;
+  text-decoration: none;
+  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+@media (min-width: 600px) {
+  .nav-container {
+      text-align:left
+  }
+
+  .nav ul {
+      bottom: 0;
+      position: absolute;
+      right: 0
+  }
 }

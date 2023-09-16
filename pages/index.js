@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
 
 const Index = () => {
@@ -41,49 +41,83 @@ const Index = () => {
     link.click();
   };
 
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter") {
+        getYouTubeThumbnail(videoURL);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [videoURL]);
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-         Download YouTube Thumbnail 
-        </h1>
-        <p className="text-gray-600">
-          Download High-Quality Thumbnails From YouTube Videos.
-        </p>
-      </header>
-      <div className="text-center">
-        <input
-          type="text"
-          className="w-full md:w-1/2 px-4 py-2 border rounded"
-          placeholder="Enter YouTube URL"
-          value={videoURL}
-          onChange={(e) => setVideoURL(e.target.value)}
-        />
-        <button
-          className="btn-blue mt-2"
-          onClick={() => getYouTubeThumbnail(videoURL)}
-        >
-          Get Thumbnail Images
-        </button>
-      </div>
-      {thumbnailOptions.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Thumbnail Options</h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {thumbnailOptions.map((option, index) => (
-              <div key={index} className="thumbnail-option">
-                <button
-                  className="btn-blue mt-2"
-                  onClick={() => handleDownloadClick(option.url, option.downloadText)}
-                >
-                  {option.downloadText}
-                </button>
-                <img src={option.url} alt={`Thumbnail ${index + 1}`} />
-              </div>
-            ))}
-          </div>
+    <div>
+      {/* Navigation Container */}
+      <nav className="nav">
+        <div className="nav-container" style={{ width: "100%", maxWidth: "100%", paddingLeft: "20px" }}>
+          <a href="/">
+            <h2 className="nav-title">Download YouTube Thumbnail</h2>
+          </a>
+          <ul style={{ paddingRight: "20px" }}>
+            <li><a href="/posts">Posts</a></li>
+            <li><a href="../../posts/privacypolicy/">Privacy Policy</a></li>
+          </ul>
         </div>
-      )}
+      </nav>
+      {/* End of Navigation Container */}
+
+      <div className="container mx-auto px-4 py-8">
+        <header className="text-center">
+          <p className="text-gray-600">
+            Download YouTube and Vimeo thumbnail images of all quality for free.
+            This application allows you to download thumbnails of all qualities.
+            Just paste the URL of the thumbnail video in the 
+            input below and click Get Thumbnail Image.
+          </p>
+        </header>
+
+        <div className="text-center">
+          <input
+            type="text"
+            className="w-full md:w-1/2 px-4 py-2 border rounded"
+            placeholder="Enter YouTube URL"
+            value={videoURL}
+            onChange={(e) => setVideoURL(e.target.value)}
+          />
+          <button
+            className="btn-blue mt-2"
+            onClick={() => getYouTubeThumbnail(videoURL)}
+          >
+            Get Thumbnail Images
+          </button>
+        </div>
+
+        {thumbnailOptions.length > 0 && (
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4">Thumbnail Options</h2>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {thumbnailOptions.map((option, index) => (
+                <div key={index} className="thumbnail-option">
+                  <button
+                    className="btn-blue mt-2"
+                    onClick={() =>
+                      handleDownloadClick(option.url, option.downloadText)
+                    }
+                  >
+                    {option.downloadText}
+                  </button>
+                  <img src={option.url} alt={`Thumbnail ${index + 1}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
