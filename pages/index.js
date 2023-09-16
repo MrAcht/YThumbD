@@ -24,6 +24,7 @@ const Index = () => {
       const thumbnailOptions = options.map((option) => ({
         resolution: option.resolution,
         url: `${thumbnailBaseUrl}${videoURL}/${option.code}.jpg`,
+        downloadText: `Download ${option.resolution} Thumbnail Image`,
       }));
 
       setThumbnailOptions(thumbnailOptions);
@@ -33,14 +34,21 @@ const Index = () => {
     }
   };
 
+  const handleDownloadClick = (url, downloadText) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "thumbnail.jpg";
+    link.click();
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold mb-2">
-          Youtube Thumbnail Downloader
+         Download YouTube Thumbnail 
         </h1>
         <p className="text-gray-600">
-          Download high-quality thumbnails from YouTube videos.
+          Download High-Quality Thumbnails From YouTube Videos.
         </p>
       </header>
       <div className="text-center">
@@ -55,7 +63,7 @@ const Index = () => {
           className="btn-blue mt-2"
           onClick={() => getYouTubeThumbnail(videoURL)}
         >
-          Download Thumbnails
+          Get Thumbnail Images
         </button>
       </div>
       {thumbnailOptions.length > 0 && (
@@ -64,13 +72,13 @@ const Index = () => {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {thumbnailOptions.map((option, index) => (
               <div key={index} className="thumbnail-option">
-                <img src={option.url} alt={`Thumbnail ${index + 1}`} />
                 <button
                   className="btn-blue mt-2"
-                  onClick={() => copy(option.url)}
+                  onClick={() => handleDownloadClick(option.url, option.downloadText)}
                 >
-                  Copy Image URL
+                  {option.downloadText}
                 </button>
+                <img src={option.url} alt={`Thumbnail ${index + 1}`} />
               </div>
             ))}
           </div>

@@ -3,7 +3,7 @@
 /* Set the base font and background color for the entire app */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7fafc;
+  background-color: #ededed;
 }
 
 /* Center align the content in the container */
@@ -17,33 +17,57 @@ body {
 
 /* Style the input and button for the YouTube URL */
 input[type="text"] {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+  border: 0.5px solid #ccc;
+  border-radius: 5px;
+  width: 300%;
+  background-color: #f4f4f4;
+  color: #333;
+  text-align: left; /* Center-align the text within the input */
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Center-align the input and button within the container */
+.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Add some spacing between input and button */
 input[type="text"] + button {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
 }
 
-/* Style the "Download Thumbnails" button */
+
+/* Style the "Get Thumbnail Images" button */
 .btn-blue {
-  background-color: #3498db;
+  background-color: #2680c5;
   color: white;
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
+
+  /* Center the button both vertically and horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-blue:hover {
-  background-color: #2680c5;
+  background-color: #3c627b;
 }
 
-/* Style the thumbnail options */
+/* Add this CSS to center the buttons */
 .thumbnail-option {
   background-color: white;
   border: 1px solid #ccc;
@@ -51,7 +75,11 @@ input[type="text"] + button {
   padding: 1rem;
   text-align: center;
   transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column; /* Center the button vertically */
+  align-items: center; /* Center the button horizontally */
 }
+
 
 .thumbnail-option:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -63,17 +91,19 @@ input[type="text"] + button {
   height: auto;
 }
 
-/* Style the "Copy Image URL" button */
+/* Style the "Download Thumbnail Image" button */
 .thumbnail-option button {
-  background-color: #3498db;
+  background-color: #3da2e5;
   color: white;
   font-weight: bold;
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-top: 0.5rem; /* Add spacing between the image and button */
+  margin-bottom: 0.1rem
 }
 
 .thumbnail-option button:hover {
-  background-color: #2680c5;
+  background-color: #3d84b9;
 }
