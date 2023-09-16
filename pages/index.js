@@ -4,6 +4,7 @@ import copy from "copy-to-clipboard";
 const Index = () => {
   const [videoURL, setVideoURL] = useState("");
   const [thumbnailOptions, setThumbnailOptions] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(""); // New state for error message
 
   const getYouTubeThumbnail = (url) => {
     let regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
@@ -29,14 +30,18 @@ const Index = () => {
 
       setThumbnailOptions(thumbnailOptions);
       setVideoURL("");
+      setErrorMessage(""); // Clear any previous error messages
     } else {
       setThumbnailOptions([]);
+      setErrorMessage("Invalid YouTube URL. Please enter a valid URL.");
     }
   };
 
   const handleDownloadClick = (url, downloadText) => {
+    const apiUrl = `/api/thumbnails?url=${encodeURIComponent(url)}`;
+
     const link = document.createElement("a");
-    link.href = url;
+    link.href = apiUrl;
     link.download = "thumbnail.jpg";
     link.click();
   };
@@ -63,10 +68,6 @@ const Index = () => {
           <a href="/">
             <h2 className="nav-title">Download YouTube Thumbnail</h2>
           </a>
-          <ul style={{ paddingRight: "20px" }}>
-            <li><a href="/posts">Posts</a></li>
-            <li><a href="../../posts/privacypolicy/">Privacy Policy</a></li>
-          </ul>
         </div>
       </nav>
       {/* End of Navigation Container */}
@@ -74,10 +75,12 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         <header className="text-center">
           <p className="text-gray-600">
-            Download YouTube and Vimeo thumbnail images of all quality for free.
-            This application allows you to download thumbnails of all qualities.
-            Just paste the URL of the thumbnail video in the 
-            input below and click Get Thumbnail Image.
+            <strong>Download high-quality YouTube and Vimeo thumbnail images for free</strong>
+            <br />
+            Our application allows you to easily fetch thumbnails of various qualities
+            <br />
+            Simply paste the video's URL into the input field below <br /> and click  
+            <strong> 'Get Thumbnail Images'</strong> to retrieve it
           </p>
         </header>
 
@@ -95,6 +98,7 @@ const Index = () => {
           >
             Get Thumbnail Images
           </button>
+          {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
         </div>
 
         {thumbnailOptions.length > 0 && (
