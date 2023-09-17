@@ -64,7 +64,7 @@ const Index = () => {
     <div>
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4717830307729484"
      crossorigin="anonymous"></script>
-        <!-- Test1 -->
+        
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-4717830307729484"
