@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /sitemap.xml
-
-Sitemap: https://www.youtubethumbnailgrabbing.com/sitemap.xml
