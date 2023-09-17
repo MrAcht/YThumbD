@@ -74,6 +74,8 @@ const Index = () => {
 
       <div className="container mx-auto px-4 py-8">
         <header className="text-center">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4717830307729484"
+         crossorigin="anonymous"></script>
           <p className="text-gray-600">
             <strong>Download high-quality YouTube and Vimeo thumbnail images for free</strong>
             <br />
