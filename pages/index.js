@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import copy from "copy-to-clipboard";
 
 const Index = () => {
   const [videoURL, setVideoURL] = useState("");
   const [thumbnailOptions, setThumbnailOptions] = useState([]);
   const [errorMessage, setErrorMessage] = useState(""); // New state for error message
 
-  const getYouTubeThumbnail = (url) => {
+  const getYouTubeThumbnail = async (url) => {
     let regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
     let match = url.match(regExp);
 
     if (match && match[1].length === 11) {
       const videoURL = match[1];
-      const thumbnailBaseUrl = "http://img.youtube.com/vi/";
+      const thumbnailBaseUrl = "https://img.youtube.com/vi/";
 
+      const base = `${thumbnailBaseUrl}${videoURL}/`;
       const options = [
         { resolution: "HD (1280x720)", code: "maxresdefault" },
         { resolution: "SD (640x480)", code: "sddefault" },
@@ -22,9 +22,19 @@ const Index = () => {
         { resolution: "Low (120x90)", code: "default" },
       ];
 
-      const thumbnailOptions = options.map((option) => ({
+      // Check if maxres is available; if not, drop it from options
+      let hasMaxRes = true;
+      try {
+        const headResp = await fetch(`/api/thumbnails?url=${encodeURIComponent(`${base}maxresdefault.jpg`)}`, { method: "HEAD" });
+        hasMaxRes = headResp.ok;
+      } catch (e) {
+        hasMaxRes = false;
+      }
+
+      const filtered = hasMaxRes ? options : options.filter(o => o.code !== "maxresdefault");
+      const thumbnailOptions = filtered.map((option) => ({
         resolution: option.resolution,
-        url: `${thumbnailBaseUrl}${videoURL}/${option.code}.jpg`,
+        url: `${base}${option.code}.jpg`,
         downloadText: `Download ${option.resolution} Thumbnail Image`,
       }));
 
@@ -74,8 +84,6 @@ const Index = () => {
 
       <div className="container mx-auto px-4 py-8">
         <header className="text-center">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4717830307729484"
-         crossorigin="anonymous"></script>
           <p className="text-gray-600">
             <strong>Download high-quality YouTube and Vimeo thumbnail images for free</strong>
             <br />
@@ -117,7 +125,7 @@ const Index = () => {
                   >
                     {option.downloadText}
                   </button>
-                  <img src={option.url} alt={`Thumbnail ${index + 1}`} />
+                  <img loading="lazy" src={option.url} alt={`YouTube thumbnail ${option.resolution}`} />
                 </div>
               ))}
             </div>
