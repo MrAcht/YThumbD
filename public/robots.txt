@@ -1,2 +1,8 @@
 User-agent: *
-Allow: /sitemap.xml
+Allow: /
+
+# Sitemap
+Sitemap: https://www.youtubethumbnailgrabbing.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
