@@ -56,19 +56,16 @@ export default async function handler(req, res) {
       res.setHeader('Content-Disposition', 'attachment; filename="thumbnail.jpg"');
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
 
-      if (upstream.body) {
-        const { Readable } = await import('stream');
-        Readable.fromWeb(upstream.body).pipe(res);
-      } else {
-        const arrayBuffer = await upstream.arrayBuffer();
-        res.status(200).send(Buffer.from(arrayBuffer));
-      }
+      // Convert the response to buffer and send it
+      const arrayBuffer = await upstream.arrayBuffer();
+      res.status(200).send(Buffer.from(arrayBuffer));
     } catch (error) {
       console.error(error);
       if (!res.headersSent) {
-        res.status(500).send('Internal Server Error');
+      res.status(500).send('Internal Server Error');
       } else {
         res.end();
       }
     }
-}
+  }
+  

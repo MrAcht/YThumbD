@@ -91,7 +91,7 @@ const Index = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Head>
         <script
           type="application/ld+json"
@@ -102,35 +102,32 @@ const Index = () => {
       <nav className="nav">
         <div className="nav-container" style={{ width: "100%", maxWidth: "100%", paddingLeft: "20px" }}>
           <a href="/">
-            <h2 className="nav-title">Download YouTube Thumbnail</h2>
+            <h2 className="nav-title">Download Youtube Thumbnail</h2>
           </a>
+          <ul>
+            <li><a href="/posts">Posts</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+          </ul>
         </div>
       </nav>
       {/* End of Navigation Container */}
 
-      <main className="container mx-auto px-4 py-8">
-        <header className="text-center mb-8">
+      <main className="container mx-auto px-4 py-4" style={{ flex: 1, marginBottom: '60px' }}>
+        <header className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            YouTube Thumbnail Downloader
+          Free Thumbnail Downloader
           </h1>
-          <p className="text-xl text-gray-600 mb-4">
-            Download high-quality YouTube thumbnail images for free in multiple resolutions
-          </p>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Extract HD, SD, and standard quality thumbnails from any YouTube video. 
-            Simply paste the video URL below and get instant access to all available thumbnail sizes.
+          <p className="text-lg text-gray-600 mb-4">
+            Download youtube and vimeo thumbnail images of all quality for free. This application let you download thumbnails of all quality. Just paste the URL of the thumbnail video in the below input and click Get Thumbnail Image
           </p>
         </header>
 
-        <section className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            How to Download YouTube Thumbnails
-          </h2>
+        <section className="text-center">
           <div className="max-w-2xl mx-auto">
             <input
               type="text"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Paste YouTube video URL here (e.g., https://youtube.com/watch?v=...)"
+              className="w-full max-w-lg px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Paste YouTube video URL here"
               value={videoURL}
               onChange={(e) => setVideoURL(e.target.value)}
               aria-label="YouTube video URL"
@@ -141,63 +138,48 @@ const Index = () => {
             >
               Get Thumbnail Images
             </button>
-            {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
+            {errorMessage && <p className="text-red-600 mt-4">{errorMessage}</p>}
           </div>
         </section>
 
         {thumbnailOptions.length > 0 && (
-          <section className="mt-12">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-              Available Thumbnail Resolutions
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <section className="mt-8">
+            <p className="text-center text-gray-600 mb-6">
+              <strong>Right Click and click on 'Save Image As..' to save the images.</strong>
+            </p>
+            <div className="max-w-4xl mx-auto">
               {thumbnailOptions.map((option, index) => (
-                <article key={index} className="thumbnail-option bg-white rounded-lg shadow-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                <div key={index} className="mb-8">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
                     {option.resolution}
                   </h3>
-                  <img 
-                    loading="lazy" 
-                    src={option.url} 
-                    alt={`YouTube thumbnail ${option.resolution}`}
-                    className="w-full h-auto rounded-lg mb-4"
-                  />
-                  <button
-                    className="btn-blue w-full py-3 font-semibold"
-                    onClick={() =>
-                      handleDownloadClick(option.url, option.downloadText)
-                    }
-                  >
-                    {option.downloadText}
-                  </button>
-                </article>
+                  <div className="text-center mb-4">
+                    <img 
+                      loading="lazy" 
+                      src={option.url} 
+                      alt={`YouTube thumbnail ${option.resolution}`}
+                      className="max-w-full h-auto mx-auto border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <button
+                      className="btn-blue px-6 py-2 font-semibold"
+                      onClick={() =>
+                        handleDownloadClick(option.url, option.downloadText)
+                      }
+                    >
+                      Download {option.resolution} Thumbnail Image
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
         )}
 
-        <section className="mt-16 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            Why Use Our YouTube Thumbnail Downloader?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Free & Fast</h3>
-              <p className="text-gray-600">Download YouTube thumbnails instantly without any cost or registration required.</p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Multiple Resolutions</h3>
-              <p className="text-gray-600">Get thumbnails in HD (1280x720), SD (640x480), and other quality options.</p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Secure & Private</h3>
-              <p className="text-gray-600">Your data is processed securely. We don't store any video URLs or personal information.</p>
-            </div>
-          </div>
-        </section>
 
-        <footer className="text-center text-gray-500 mt-16 pb-8">
-          <p>&copy; 2024 YThumbD - YouTube Thumbnail Downloader. All rights reserved.</p>
+        <footer>
+          <p>&copy; 2025 YThumbD - YouTube Thumbnail Downloader. All rights reserved.</p>
         </footer>
       </main>
     </div>
